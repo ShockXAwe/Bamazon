@@ -82,16 +82,17 @@ function view() {
 }
 
 function shoppingTime (){
-
+    console.log("****************************************");
+    console.log("****************************************");
+    console.log("****************************************");
+    console.log("****************************************");
     inquirer
   .prompt([
-    // Here we create a basic text prompt.
     {
       type: "input",
       message: "Please enter the ID # of the product youd like to purchase.",
       name: "productSelection"
     },
-    // Here we create a basic password-protected text prompt.
     {
       type: "input",
       message: "How many?",
