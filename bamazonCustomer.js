@@ -107,13 +107,28 @@ function shoppingTime (){
   ])
 
   .then(function(inquirerResponse) {
-    // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
+  
     if (inquirerResponse.confirm) {
-        console.log("Excellent you want: " + inquirerResponse.productSelection)
-        console.log("With a quantity of: " + inquirerResponse.productQuantity)
+      connection.query("UPDATE products SET ? Where ?"
+      [
+        {
+          stock_quantity: - parseInt(inquirerResponse.productQuantity)
+        },
+        {
+          item_id: parseInt(inquirerResponse.productSelection)
+        }
+      ],
+      function (err, res) {
+        console.log(res + " products updated!\n");
+        // console.log(" products updated!\n");
+        console.log(inquirerResponse.productQuantity)
+        console.log(inquirerResponse.productSelection)
+      })
+        // console.log("Excellent you want: " + inquirerResponse.productSelection)
+        // console.log("With a quantity of: " + inquirerResponse.productQuantity)
     }
     else {
-      console.log("\nThat's okay " + inquirerResponse.username + ", come again when you are more sure.\n");
+      console.log("Why you gotta be so rude?!");
     }
   });
 
