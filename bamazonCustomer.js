@@ -109,30 +109,20 @@ function shoppingTime (){
   .then(function(inquirerResponse) {
   
     if (inquirerResponse.confirm) {
-      connection.query("UPDATE products SET ? Where ?"
-      [
-        {
-          stock_quantity: - parseInt(inquirerResponse.productQuantity)
-        },
-        {
-          item_id: parseInt(inquirerResponse.productSelection)
-        }
-      ],
+     // Need logic for IF query view for productSelection is less then productQuantity selected by user, console.log unable to do due to lack of inventory, else continue
+      connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
+      [inquirerResponse.productQuantity, inquirerResponse.productSelection],
       function (err, res) {
-        console.log(res + " products updated!\n");
-        // console.log(" products updated!\n");
-        console.log(inquirerResponse.productQuantity)
-        console.log(inquirerResponse.productSelection)
+        if (err){
+          console.log(err)
+        } console.log("products updated!\n");
       })
-        // console.log("Excellent you want: " + inquirerResponse.productSelection)
-        // console.log("With a quantity of: " + inquirerResponse.productQuantity)
     }
     else {
       console.log("Why you gotta be so rude?!");
     }
+    connection.end();
   });
-
-  connection.end();
 
 }
 
