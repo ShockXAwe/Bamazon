@@ -112,7 +112,6 @@ function shoppingTime() {
           for (var i = 0; i < res.length; i++) {
             if (res[i].item_id == inquirerResponse.productSelection && res[i].stock_quantity >= inquirerResponse.productQuantity) {
               var total = res[i].price * inquirerResponse.productQuantity;
-              console.log(total);
               connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
                 [inquirerResponse.productQuantity, inquirerResponse.productSelection],
                 function (err, res) {
